@@ -9,7 +9,7 @@ import com.green.myAppApi.domain.dto.post.PostSaveDTO;
 
 public interface PostService {
 
-	Page<?> listProcess();
+	Page<?> listProcess(int page);
 
 	PostDetailDTO detailProcess(Long pno);
 

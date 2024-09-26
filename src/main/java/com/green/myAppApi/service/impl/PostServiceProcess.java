@@ -28,22 +28,17 @@ public class PostServiceProcess implements PostService{
 	private final ModelMapper modelMapper;
 	
 	@Override
-	public Page<?> listProcess() {
-		int pageNo=1;//현실에서 페이지 1
+	public Page<?> listProcess(int page) {
+		//int page=1;//현실에서 페이지 1
 		//시작페이지 0부터, 음수는 불가
-		int pageNumber= (pageNo-1) < 0 ? 0 : (pageNo-1); 
-		int pageSize=5;//페이지당 개수
+		int pageNumber= (page-1) < 0 ? 0 : (page-1); 
+		int pageSize=3;//페이지당 개수
 		Sort sort=Sort.by(Direction.DESC, "pno");
 		Pageable pageable=PageRequest.of(pageNumber, pageSize, sort);
 		//Page<?> result=reopsitory.findAll(pageable);
 		Page<PostListDTO> result=reopsitory.findAll(pageable)
 				.map(post->modelMapper.map(post, PostListDTO.class));
-		List<PostListDTO> list=result.getContent();
-		int pagetot=result.getTotalPages();
-		int page=result.getNumber();
-		System.out.println("현재페이지번호:"+page);
-		System.out.println("총페이지개수"+pagetot);
-		//result.add(new PostListDTO()); 예외발생
+				
 		return result;
 	}
 
