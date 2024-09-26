@@ -4,11 +4,16 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.green.myAppApi.domain.dto.post.PostDetailDTO;
+import com.green.myAppApi.domain.dto.post.PostSaveDTO;
 import com.green.myAppApi.service.PostService;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 
@@ -26,6 +31,13 @@ public class PostController {
 	@GetMapping("/api/posts/{pno}")
 	public PostDetailDTO detail(@PathVariable(name = "pno") Long pno) {
 		return service.detailProcess(pno);
+	}
+	
+	//@ResponseBody
+	@PostMapping("/api/posts")
+	public void  save(@RequestBody PostSaveDTO dto) {
+		
+		service.saveProcess(dto);
 	}
 	
 	

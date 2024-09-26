@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.green.myAppApi.domain.dto.post.PostDetailDTO;
 import com.green.myAppApi.domain.dto.post.PostListDTO;
+import com.green.myAppApi.domain.dto.post.PostSaveDTO;
+import com.green.myAppApi.domain.entity.PostEntity;
 import com.green.myAppApi.domain.entity.PostEntityRepository;
 import com.green.myAppApi.service.PostService;
 
@@ -37,6 +39,12 @@ public class PostServiceProcess implements PostService{
 		return reopsitory.findById(pno)
 				.map(post->modelMapper.map(post, PostDetailDTO.class))
 				.orElseThrow();
+	}
+
+	@Override
+	public void saveProcess(PostSaveDTO dto) {
+		reopsitory.save(modelMapper.map(dto, PostEntity.class));
+		
 	}
 
 }
