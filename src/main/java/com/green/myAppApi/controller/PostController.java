@@ -2,6 +2,7 @@ package com.green.myAppApi.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class PostController {
 	private final PostService service;
 	
 	@GetMapping("/api/posts")
-	public List<?>  list() {
+	public Page<?>  list() {
 		
 		return service.listProcess();
 	}
