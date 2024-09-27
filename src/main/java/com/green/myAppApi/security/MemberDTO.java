@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,7 +25,7 @@ public class MemberDTO extends User{
 
 	public MemberDTO(MemberEntity member) {
 		super(member.getEmail(), member.getPw(), member.getMemberRoles().stream()
-				.map(role->new SimpleGrantedAuthority("ROLE_"+role)).toList());
+				.map(role->new SimpleGrantedAuthority("ROLE_"+role)).collect(Collectors.toSet()));
 		
 		this.email=member.getEmail();
 		//this.pw=member.getPw();

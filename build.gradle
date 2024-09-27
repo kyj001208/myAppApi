@@ -28,6 +28,16 @@ ext {
 }
 
 dependencies {
+	
+	// JWT 생성 및 파싱을 위한 주요 인터페이스와 클래스 제공
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+	
+	// JJWT_API의 실제 구현체 입니다
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+	
+	//JWT 클레임을 JSON으로 직렬화/역직렬화하는데 사용되는 Jackson 라이브러리와 통합을 제공합니다.
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+	
 
 	implementation 'org.modelmapper:modelmapper:3.2.1'
 	

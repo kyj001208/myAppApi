@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberEntityRepository extends JpaRepository<MemberEntity, String>{
 	
 	//memberRoleList 을 즉시 로딩한다.
-	@EntityGraph(attributePaths = {"memberRoleList"})
+	@EntityGraph(attributePaths = {"memberRoles"})
 	Optional<MemberEntity> findByEmail(String email);
 	
 	
