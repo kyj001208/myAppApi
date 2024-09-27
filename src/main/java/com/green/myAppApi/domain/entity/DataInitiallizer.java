@@ -5,9 +5,10 @@ import org.modelmapper.config.Configuration.AccessLevel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class PostDataInitiallizer {
+public class DataInitiallizer {
 	
 	@Bean
     ModelMapper modelMapper() {
@@ -34,7 +35,7 @@ public class PostDataInitiallizer {
     }
 	
 	@Bean
-	CommandLineRunner initData(PostEntityRepository repository) {
+	CommandLineRunner initData1(PostEntityRepository repository) {
 		
 		return args->{
 			if(repository.count()==0) {
@@ -44,6 +45,34 @@ public class PostDataInitiallizer {
 							.content("내용"+i)
 							.writer("테스트")
 							.build());
+				}
+			}
+		};
+	}
+	
+	@Bean
+	CommandLineRunner initData2(MemberEntityRepository repository,PasswordEncoder encoder) {
+		
+		return args->{
+			if(repository.count()==0) {
+				for(int i=1; i<=9; i++) {
+					
+					MemberEntity member=MemberEntity.builder()
+							.email("user"+i+"@test.com")
+							.pw(encoder.encode("1234"))
+							.nickname("user"+i)
+							.build();
+					member.addRole(MemberRole.USER);
+					
+					if(i>=7) {
+						member.addRole(MemberRole.MANAGER);
+					}
+					
+					if(i==9) {
+						member.addRole(MemberRole.ADMIN);
+					}
+					
+					repository.save(member);
 				}
 			}
 		};
